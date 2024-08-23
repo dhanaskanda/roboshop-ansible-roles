@@ -24,8 +24,10 @@
 
 - name: "Load the {{component}} data"
   ansible.builtin.shell: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
-  when: entries_count.stdout == "0"
+  when: products_count.stdout == "0"
+  ignore_errors: true
 
 - name: "Load the {{component}} data"
   ansible.builtin.shell: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
-  when: entries_count.stdout == "0"
+  when: users_count.stdout == "0"
+  ignore_errors: true
