@@ -9,12 +9,12 @@
     state: present
 
 - name: Get the catageries count
-  ansible.builtin.command: mongo --host mongodb.dhanaskanda.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  ansible.builtin.shell: mongo --host mongodb.dhanaskanda.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: entries_count
   when: component == "catalogue"
 
 - name: Get the catageries count
-  ansible.builtin.command: mongo --host mongodb.dhanaskanda.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+  ansible.builtin.shell: mongo --host mongodb.dhanaskanda.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   register: entries_count
   when: component == "user"
 
