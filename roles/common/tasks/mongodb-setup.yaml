@@ -8,19 +8,23 @@
     name: mongodb-org-shell
     state: present
 
-- name: "Get the {{component}} entries count"
+- name: "Get the catalogue entries count"
   ansible.builtin.shell: mongo --host mongodb.dhanaskanda.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
-  register: entries_count
+  register: products_count
   when: component == "catalogue"
 
-- name: "Get the {{component}} entries count"
-  ansible.builtin.shell: mongo --host mongodb.dhanaskanda.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
-  register: entries_count
+- name: "Get the user entries count"
+  ansible.builtin.shell: mongo --host mongodb.dhanaskanda.online --quiet --eval 'db = db.getSiblingDB("user"); db.users.count()'
+  register: users_count
   when: component == "user"
 
-# - name: print the count
-#   ansible.builtin.debug:
-#     msg: "Product count: {{product_count}}"
+- name: print the count
+  ansible.builtin.debug:
+    msg: "Product count: {{products_count}}"
+
+- name: "Load the {{component}} data"
+  ansible.builtin.shell: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
+  when: entries_count.stdout == "0"
 
 - name: "Load the {{component}} data"
   ansible.builtin.shell: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
