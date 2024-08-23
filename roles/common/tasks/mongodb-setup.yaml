@@ -23,5 +23,5 @@
 #     msg: "Product count: {{product_count}}"
 
 - name: "Load the {{component}} data"
-  ansible.builtin.command: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
   when: entries_count.stdout == "0"
