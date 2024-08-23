@@ -1,9 +1,14 @@
-- name: ap setup
+- name: app setup
   ansible.builtin.import_role:
     name: common
     tasks_from: app-setup
 
-- name: ap setup
+- name: nodejs setup
   ansible.builtin.import_role:
     name: common
     tasks_from: nodejs
+
+- name: mongo data
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: mongodb-setup
