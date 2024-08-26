@@ -9,12 +9,12 @@
     state: present
 
 - name: "Get the catalogue entries count"
-  ansible.builtin.shell: mongo --host mongodb.dhanaskanda.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  ansible.builtin.shell: mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: products_count
   when: component == "catalogue"
 
 - name: "Get the user entries count"
-  ansible.builtin.shell: mongo --host mongodb.dhanaskanda.online --quiet --eval 'db = db.getSiblingDB("user"); db.users.count()'
+  ansible.builtin.shell: mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("user"); db.users.count()'
   register: users_count
   when: component == "user"
 
@@ -23,11 +23,11 @@
 #     msg: "Product count: {{products_count}}"
 
 - name: "Load the {{component}} data"
-  ansible.builtin.shell: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
   when: component == "catalogue" and products_count.stdout == "0"
   # ignore_errors: true
 
 - name: "Load the {{component}} data"
-  ansible.builtin.shell: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
   when: component == "user" and users_count.stdout == "0"
   # ignore_errors: true
