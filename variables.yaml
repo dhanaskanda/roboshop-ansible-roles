@@ -1,1 +1,2 @@
 MONGODB_HOST: mongodb.dhanaskanda.online
+REDIS_HOST: redis.dhanaskanda.online
