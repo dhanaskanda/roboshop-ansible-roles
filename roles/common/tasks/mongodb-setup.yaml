@@ -18,16 +18,16 @@
   register: users_count
   when: component == "user"
 
-- name: print the count
-  ansible.builtin.debug:
-    msg: "Product count: {{products_count}}"
+# - name: print the count
+#   ansible.builtin.debug:
+#     msg: "Product count: {{products_count}}"
 
 - name: "Load the {{component}} data"
   ansible.builtin.shell: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
-  when: products_count.stdout == "0"
-  ignore_errors: true
+  when: component == "catalogue" and products_count.stdout == "0"
+  # ignore_errors: true
 
 - name: "Load the {{component}} data"
   ansible.builtin.shell: "mongo --host mongodb.dhanaskanda.online < /app/schema/{{component}}.js"
-  when: users_count.stdout == "0"
+  when: component == "user" and users_count.stdout == "0"
   ignore_errors: true
