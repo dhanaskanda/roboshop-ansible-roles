@@ -1,3 +1,10 @@
 MONGODB_HOST: mongodb.dhanaskanda.online
 REDIS_HOST: redis.dhanaskanda.online
 CATALOGUE_HOST: catalogue.dhanaskanda.online
+CART_HOST:  cart.dhanaskanda.online
+USER_HOST:  user.dhanaskanda.online
+PAYMENT_HOST: payment.dhanaskanda.online
+SHIPPING_HOST:  shipping.dhanaskanda.online
+DISPATCH_HOST:  dispatch.dhanaskanda.online
+RABBITMQ_HOST:  rabbitmq.dhanaskanda.online
+MYSQL_HOST: mysql.dhanaskanda.online
