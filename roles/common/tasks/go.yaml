@@ -9,3 +9,5 @@
   - go mod init dispatch
   - go get
   - go build
+  args:
+    chdir: /app
