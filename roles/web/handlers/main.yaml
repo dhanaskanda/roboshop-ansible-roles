@@ -1,4 +1,4 @@
-  - name: Start and enable the nginx
+  - name: Restart nginx
     ansible.builtin.service:
       name: nginx
       state: restarted
